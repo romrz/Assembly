@@ -1,4 +1,9 @@
+;;; ;;
+;;; This program change the case of one file
+;;; and stores the changes in another.
+;;; ;;
 
+	
 BITS 32
 
 %macro exit 0
