@@ -2,6 +2,11 @@
 ;;; This program change the case of one file
 ;;; and stores the changes in another.
 ;;; ;;
+;;; Execute & Compile
+;;; nasm -f elf toggle_case.asm
+;;; ld -s -o toggle_case toggle_case.o -m elf_i386
+;;; ./toggle_case input_file output_file
+;;; ;;
 
 	
 BITS 32
@@ -67,7 +72,7 @@ open_file:
 
 	;; Creates the file
 	_create_file:
-		mov ecx,0777	; Permissions
+		mov ecx,00700q	; Write, read, and execute Permissions
 		mov eax,8	; sys_creat()
 		int 0x80	; kernel call
 		test eax,eax	; Checks for errors
@@ -171,7 +176,7 @@ _start:
 		je _exit		; Exit if eof is reached
 
 		mov eax,[buffer]
-		call to_lower_case
+		call to_upper_case
 		mov [buffer],eax
 
 		;; Writes one character to dest file 
